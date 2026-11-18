@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chocolate Lovers Shop — Malaysia</title>
+<style>
+  :root {
+    --cocoa-dark: #3b2314;
+    --cocoa: #5a3a22;
+    --cocoa-light: #8a5a35;
+    --cream: #fff6ec;
+    --cream-deep: #f6e7d4;
+    --caramel: #d99a4e;
+    --rose: #c4703f;
+    --shadow: 0 10px 30px rgba(59, 35, 20, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    background: linear-gradient(160deg, var(--cream) 0%, var(--cream-deep) 100%);
+    color: var(--cocoa-dark);
+    min-height: 100vh;
+    padding: 32px 16px 64px;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 36px; }
+  header .logo {
+    display: inline-block;
+    background: var(--cocoa-dark);
+    color: var(--cream);
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  header h1 {
+    font-size: 40px;
+    color: var(--cocoa);
+    letter-spacing: 0.5px;
+  }
+  header p { color: var(--cocoa-light); margin-top: 8px; font-size: 17px; }
+
+  section {
+    background: #fffdf9;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    padding: 28px;
+    margin-bottom: 28px;
+  }
+  section h2 {
+    font-size: 22px;
+    color: var(--cocoa);
+    margin-bottom: 4px;
+  }
+  section .sub { color: var(--cocoa-light); font-size: 14px; margin-bottom: 20px; }
+
+  /* Products */
+  .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .product-card {
+    background: linear-gradient(150deg, var(--cream) 0%, #fff 100%);
+    border: 1px solid var(--cream-deep);
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .product-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .product-emoji {
+    font-size: 44px;
+    width: 80px; height: 80px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 12px;
+    background: var(--cream-deep);
+    border-radius: 50%;
+  }
+  .product-card h3 { font-size: 18px; color: var(--cocoa-dark); margin-bottom: 6px; }
+  .product-card .note { font-size: 13.5px; color: var(--cocoa-light); min-height: 38px; margin-bottom: 12px; }
+  .product-card .sample { font-size: 11px; color: var(--caramel); margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+  .add-btn {
+    background: var(--cocoa);
+    color: var(--cream);
+    border: none;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 11px 22px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .add-btn:hover { background: var(--cocoa-dark); }
+  .add-btn.added { background: var(--rose); }
+
+  /* Cart */
+  .cart-empty { color: var(--cocoa-light); font-style: italic; text-align: center; padding: 18px 0; }
+  .cart-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--cream);
+    border-radius: 14px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+  }
+  .cart-item .cart-emoji { font-size: 26px; }
+  .cart-item .cart-name { flex: 1; font-weight: bold; color: var(--cocoa-dark); }
+  .qty-controls { display: flex; align-items: center; gap: 8px; }
+  .qty-btn {
+    width: 30px; height: 30px;
+    border: none;
+    border-radius: 8px;
+    background: var(--cocoa);
+    color: var(--cream);
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .qty-btn:hover { background: var(--cocoa-dark); }
+  .qty-btn:disabled { opacity: 0.4; cursor: default; }
+  .qty-label { min-width: 42px; text-align: center; font-weight: bold; color: var(--cocoa); }
+  .remove-btn {
+    border: none;
+    background: none;
+    color: var(--rose);
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: underline;
+    font-family: inherit;
+  }
+  .remove-btn:hover { color: var(--cocoa-dark); }
+
+  /* Summary */
+  .summary-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 4px;
+    border-bottom: 1px dashed var(--cream-deep);
+    font-size: 15px;
+    color: var(--cocoa-dark);
+  }
+  .summary-line .s-qty { color: var(--cocoa-light); margin-left: 6px; }
+  .summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 14px;
+    padding: 14px 18px;
+    background: var(--cocoa-dark);
+    color: var(--cream);
+    border-radius: 14px;
+  }
+  .summary-total .total-count { font-size: 26px; font-weight: bold; }
+  .summary-total .total-label { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--caramel); }
+  .summary-message {
+    margin-top: 16px;
+    background: var(--cream);
+    border-radius: 14px;
+    padding: 16px 18px;
+    font-size: 14.5px;
+    color: var(--cocoa);
+    text-align: center;
+  }
+  .summary-message strong { color: var(--cocoa-dark); }
+
+  footer { text-align: center; color: var(--cocoa-light); font-size: 12.5px; margin-top: 8px; }
+
+  @media (max-width: 560px) {
+    header h1 { font-size: 30px; }
+    .cart-item { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="logo">Kedai Coklat</span>
+    <h1>🍫 Chocolate Lovers Shop</h1>
+    <p>A little taste of Malaysia, wrapped in chocolate — just for browsing fun.</p>
+  </header>
+
+  <!-- 1. Product Gallery -->
+  <section id="gallery">
+    <h2>Our Chocolates</h2>
+    <p class="sub">Sample treats inspired by Malaysian flavours. Tap “Add to Cart” to try them out.</p>
+    <div class="products" id="product-list"></div>
+  </section>
+
+  <!-- 2. Cart Preview -->
+  <section id="cart">
+    <h2>Cart Preview 🛒</h2>
+    <p class="sub">Your picks so far. Change quantities or remove items anytime.</p>
+    <div id="cart-items"></div>
+  </section>
+
+  <!-- 3. Order Summary -->
+  <section id="summary">
+    <h2>Order Summary</h2>
+    <p class="sub">A simple review of your pretend order — nothing is charged or saved.</p>
+    <div id="summary-lines"></div>
+    <div class="summary-total">
+      <span class="total-label">Total items</span>
+      <span class="total-count" id="total-count">0</span>
+    </div>
+    <div class="summary-message" id="summary-message"></div>
+  </section>
+
+  <footer>Chocolate Lovers Shop · Sample data only · No payments, no saved orders · Made for chocolate fans in Malaysia 🇲🇾</footer>
+</div>
+
+<script>
+  // Sample products (made up, Malaysian-inspired, sample names only)
+  const PRODUCTS = [
+    { id: "durian",  emoji: "🥭", name: "Musang King Durian Truffle", note: "Creamy durian ganache inspired by Pahang's famous durian season.", hint: "Sample item — imaginary treat" },
+    { id: "teh",     emoji: "🧋", name: "Teh Tarik Milk Chocolate Bar", note: "Smooth milk chocolate with a pull-tea caramel swirl, mamak style.", hint: "Sample item — imaginary treat" },
+    { id: "pandan",  emoji: "🌿", name: "Pandan Gula Melaka Bites", note: "Fragrant pandan praline filled with gula melaka coconut caramel.", hint: "Sample item — imaginary treat" }
+  ];
+
+  let cart = []; // [{ id, qty }]
+
+  const productListEl = document.getElementById("product-list");
+  const cartItemsEl = document.getElementById("cart-items");
+  const summaryLinesEl = document.getElementById("summary-lines");
+  const totalCountEl = document.getElementById("total-count");
+  const summaryMessageEl = document.getElementById("summary-message");
+
+  function productById(id) { return PRODUCTS.find(p => p.id === id); }
+
+  function renderProducts() {
+    productListEl.innerHTML = PRODUCTS.map(p => `
+      <div class="product-card">
+        <div class="product-emoji">${p.emoji}</div>
+        <h3>${p.name}</h3>
+        <p class="note">${p.note}</p>
+        <p class="sample">${p.hint}</p>
+        <button class="add-btn" data-add="${p.id}">Add to Cart</button>
+      </div>
+    `).join("");
+  }
+
+  function renderCart() {
+    if (cart.length === 0) {
+      cartItemsEl.innerHTML = `<p class="cart-empty">Your cart is empty — add a chocolate above! 🍫</p>`;
+      return;
+    }
+    cartItemsEl.innerHTML = cart.map(line => {
+      const p = productById(line.id);
+      return `
+        <div class="cart-item">
+          <span class="cart-emoji">${p.emoji}</span>
+          <span class="cart-name">${p.name}</span>
+          <div class="qty-controls">
+            <button class="qty-btn" data-dec="${p.id}" aria-label="Decrease quantity">−</button>
+            <span class="qty-label">× ${line.qty}</span>
+            <button class="qty-btn" data-inc="${p.id}" aria-label="Increase quantity">+</button>
+          </div>
+          <button class="remove-btn" data-remove="${p.id}">Remove</button>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function renderSummary() {
+    const total = cart.reduce((s, l) => s + l.qty, 0);
+    if (cart.length === 0) {
+      summaryLinesEl.innerHTML = `<p class="cart-empty">Nothing to review yet — your summary will appear here.</p>`;
+      summaryMessageEl.innerHTML = `Add a chocolate or two, and your <strong>imaginary order summary</strong> will show up right here.`;
+    } else {
+      summaryLinesEl.innerHTML = cart.map(l => {
+        const p = productById(l.id);
+        return `<div class="summary-line"><span>${p.emoji} ${p.name}<span class="s-qty">× ${l.qty}</span></span><span>${l.qty} ${l.qty === 1 ? "item" : "items"}</span></div>`;
+      }).join("");
+      summaryMessageEl.innerHTML = `You're reviewing <strong>${total} ${total === 1 ? "chocolate item" : "chocolate items"}</strong> across ${cart.length} ${cart.length === 1 ? "flavour" : "flavours"}. This is just a preview — nothing was purchased, charged, or saved. Selamat menjamu selera! 🍫`;
+    }
+    totalCountEl.textContent = total;
+  }
+
+  function renderAll() { renderCart(); renderSummary(); }
+
+  function addToCart(id) {
+    const line = cart.find(l => l.id === id);
+    if (line) line.qty += 1;
+    else cart.push({ id, qty: 1 });
+    renderAll();
+  }
+
+  function removeFromCart(id) {
+    cart = cart.filter(l => l.id !== id);
+    renderAll();
+  }
+
+  function changeQty(id, delta) {
+    const line = cart.find(l => l.id === id);
+    if (!line) return;
+    line.qty += delta;
+    if (line.qty <= 0) removeFromCart(id);
+    else renderAll();
+  }
+
+  document.addEventListener("click", (e) => {
+    const t = e.target;
+    if (t.dataset.add)    addToCart(t.dataset.add);
+    if (t.dataset.remove) removeFromCart(t.dataset.remove);
+    if (t.dataset.inc)    changeQty(t.dataset.inc, +1);
+    if (t.dataset.dec)    changeQty(t.dataset.dec, -1);
+  });
+
+  renderProducts();
+  // Start with one item in the cart so the app never looks empty
+  addToCart("teh");
+</script>
+</body>
+</html>
