@@ -13,13 +13,17 @@ The sample products are imaginary treats inspired by Malaysian flavours:
 - 🥭 **Musang King Durian Truffle** — creamy durian ganache inspired by Pahang's durian season
 - 🧋 **Teh Tarik Milk Chocolate Bar** — milk chocolate with a pull-tea caramel swirl, mamak style
 - 🌿 **Pandan Gula Melaka Bites** — pandan praline with gula melaka coconut caramel
+- ☕ **White Kopi-O Praline** — bittersweet white coffee praline with condensed milk
+- 🌶️ **Asam Boom Dark Bar** — 70% dark chocolate with tamarind and chilli
+- 🍧 **Cendol Truffle Square** — coconut-pandan truffle with red bean and gula drizzle
 
 ## Features
 
 - **Add to cart** — tap a product and it appears in the cart preview with quantity 1
 - **Remove item** — take any item out of the cart instantly
 - **Update quantity** — change amounts with − / + controls; the cart and summary update immediately
-- **Order summary** — a checkout-style review showing chosen items, total count, and a summary message (no payment is taken)
+- **Order summary** — a checkout-style review showing chosen items, total count, flavour stats, and a summary message (no payment is taken)
+- **Toast notifications** — friendly feedback on every cart action
 - **Never empty** — the page always opens with sample entries already visible
 
 ## Sections
